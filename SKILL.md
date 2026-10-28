@@ -1,6 +1,6 @@
 ---
 name: facund
-description: Write prose that reads as clear, specific, fluent human writing, free of bloviation and the reflexive rhetorical patterns typical of AI text (significance inflation, "not just X but Y", triads, rhetorical questions, punchy setup lines, slogans, puffery). Based on Wikipedia's "Signs of AI writing" field guide. Use this skill whenever writing text another person will read, such as Markdown documents, READMEs, web page copy, code comments, PR and issue descriptions, review comments, commit messages, emails, reports, and announcements, even if the user doesn't ask for a style pass. Also use it when the user asks to rewrite, tighten, copyedit, de-AI, or humanize a piece of text.
+description: Write prose free of AI-text patterns; use for any text another person will read (docs, code comments, commit messages, PR descriptions, emails) and when asked to rewrite, tighten or de-AI text.
 ---
 
 # Facund
