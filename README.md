@@ -1,6 +1,6 @@
 # facund
 
-facund is an agent skill that tells Claude Code, GitHub Copilot CLI, and other agents that read `SKILL.md` files how to write prose without the patterns common in AI-generated text. Its main targets are bloviation (significance claims, puffery, grand openers, recaps) and reflexive rhetorical devices ("not just X, but Y", triads, rhetorical questions, setup lines, slogans).
+facund is an agent skill that tells Claude Code, GitHub Copilot CLI, and other agents that read `SKILL.md` files how to write prose without the patterns common in AI-generated text. Its main targets are bloviation (significance claims, puffery, grand openers, recaps) and reflexive rhetorical devices ("not just X, but Y", "should be treated as X rather than Y", triads, rhetorical questions, setup lines, slogans).
 
 The guidance is adapted from [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), a guide that WikiProject AI Cleanup maintains for spotting AI-generated text in articles. The skill turns its observations into instructions for writing. For each pattern, the agent states the fact the sentence was standing in for or deletes the sentence, and it flags missing details instead of inventing them.
 
@@ -40,4 +40,4 @@ python3 scripts/scan.py < draft.txt
 
 ## License
 
-`SKILL.md` and `references/catalog.md` adapt text and examples from [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) by Wikipedia contributors, retrieved 23 September 2026. The adaptation reorganizes the material as writing guidance and adds instructions and examples. Both files are licensed under [CC BY-SA 4.0](LICENSE-CC-BY-SA). `scripts/scan.py` is licensed under the [MIT License](LICENSE-MIT).
+`SKILL.md` and `references/catalog.md` adapt text and examples from [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) and its [Style](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing/Style) and [Markup](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing/Markup) subpages by Wikipedia contributors, retrieved 9 November 2026. The adaptation reorganizes the material as writing guidance and adds instructions and examples. Both files are licensed under [CC BY-SA 4.0](LICENSE-CC-BY-SA). `scripts/scan.py` is licensed under the [MIT License](LICENSE-MIT).

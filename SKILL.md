@@ -9,9 +9,11 @@ description: Write prose free of AI-text patterns; use for any text another pers
 
 ## Why AI prose reads the way it does
 
-A language model predicts the most likely next word, so its prose regresses to the mean. Specific, unusual facts are rare in its training data, while generic, positive, important-sounding phrasing is common, so the model tends to replace the former with the latter. Wikipedia's example is "inventor of the first train-coupling device" turning into "a revolutionary titan of industry", which is both less specific and more exaggerated than the original.
+A language model predicts the most likely next word, so its prose regresses to the mean. Specific, unusual facts are rare in its training data, while generic, positive, important-sounding phrasing is common, so the model tends to replace the former with the latter. Most chat models are then tuned on human ratings (reinforcement learning from human feedback) toward the most broadly palatable prose, which strengthens the pull toward safe, agreeable phrasing. Wikipedia's example is "inventor of the first train-coupling device" turning into "a revolutionary titan of industry", which is both less specific and more exaggerated than the original.
 
 Persuasive devices such as contrasts, triads, and punchlines are also common in the web text that models learn from, so models use them whether or not the content is making an argument.
+
+The surface patterns change with each model generation. By late 2026 newer models produced less blatant puffery and fewer em dashes, and more "rather than" contrasts and warnings about how to interpret a claim. This skill covers the older patterns as well, since they are still poor writing whichever model produced them.
 
 Replacing the surface form of one of these patterns leaves the underlying problem in place. Rewriting "delve into" as "dig into", or replacing an em dash with a colon, produces a sentence with the same lack of content. The fixes in this skill address what the pattern stands in for, which is usually a missing fact, a missing source, or a sentence with no reason to exist.
 
@@ -50,13 +52,14 @@ Fix bloviation by stating the fact the sentence was gesturing at, or by deleting
 These are persuasive devices used out of habit. One of them can be appropriate in a piece that argues a position. Used in every paragraph, or in reference documentation and comments, they make the text read like marketing.
 
 - Negative parallelism: "not just X, but Y", "not only X but also Y", "It's not X, it's Y", "This isn't X. Rather, it's Y", "no X, no Y, just Z", "Y rather than X". These set up a misconception in order to correct it. Write the claim about Y directly.
+- Corrective framing: unprompted instructions on how to read a result or claim, such as "these results should be treated as indicative rather than definitive", "this does not by itself establish that...", "X should not be confused with Y", or "the distinction matters because". Models started doing this in mid-2026. State what the evidence shows and stop. If the reader needs to know a limit on a claim, state the limit as a fact ("the trial followed 40 patients for six weeks") instead of telling the reader what not to conclude. Disambiguate only when readers are likely to confuse the two things.
 - Rule of three: reflexive triads of adjectives or phrases ("fast, reliable, and scalable"), especially as a closing flourish ("It grows from critique, correction, and clarity"). List as many items as actually exist. Three items are appropriate only when there are three things to list.
 - Rhetorical questions answered immediately: "One might wonder: why not cook it on the ship?", "The result?", "Why does this matter?". Write the answer as a statement.
 - Setup lines: a short sentence whose only job is to announce or dramatize the next one, such as "Here's the thing:", "The catch:", "This matters.", or "Two tests catch most of it." A spaced em dash before a punchline does the same job. Delete the setup and write the content directly.
 - Slogans and aphorisms: "Movements evolve before they're neatly labelled." "Consensus doesn't grow from silence." They sound quotable but make no claim a reader could check. Replace them with the actual claim and its support, or delete them.
 - Paired metaphors: "not a mirror but a portal". Describe what the thing does.
 - Dramatic fragments: "Not a career. Not a body of work. Just an algorithmic moment." Write a complete declarative sentence.
-- Em dashes used for emphasis. Restructure with commas, parentheses, a subordinate clause, or two sentences; swapping in a colon or hyphen keeps the same rhythm. Check your own output for them whichever model you are. A July 2026 study found that Claude uses more em dashes than professional writers, and OpenAI had to suppress them in GPT-5.1.
+- Em dashes used for emphasis. Restructure with commas, parentheses, a subordinate clause, or two sentences; swapping in a colon or hyphen keeps the same rhythm. Check your own output for them whichever model you are. A July 2026 study found that Claude uses more em dashes than professional writers, and OpenAI had to suppress them in GPT-5.1. Don't overcorrect into prose punctuated only by commas and periods, in short sentences of similar length. Wikipedia's editors report that the newest models, which suppress em dashes entirely, write this way, and that the flat punctuation has become a sign of its own.
 
 Prefer plain declarative sentences.
 
@@ -76,7 +79,7 @@ Conventions by destination:
 - Web page copy: apply the same restraint as in documentation. Readers trust specific claims and discount adjectives.
 - Code comments: explain why, or what the code doesn't show (constraints, invariants, workarounds, units). Don't narrate or praise the code. Match the comment density of the surrounding file.
 - PR descriptions and commit messages: say what changed and why, with the evidence (test output, benchmarks, issue links). Leave out adjectives describing the change.
-- Review and issue comments: state the problem and its consequence first, then a suggestion. Don't surround criticism with compliments, and don't stack hedges on a suggestion ("it might be worth considering whether we could potentially").
+- Review and issue comments: state the problem and its consequence first, then a suggestion. Don't surround criticism with compliments, and don't stack hedges on a suggestion ("it might be worth considering whether we could potentially"). When replying to criticism, answer the specific point instead of writing like a customer service agent ("I have carefully reviewed", "I apologize for any inconvenience", "if there are specific issues, please point them out and I will resolve them").
 
 ## Reviewing a draft
 
@@ -102,7 +105,7 @@ Use these steps on your own draft before handing it over, or on the user's text 
 
 | Pattern | Looks like | Fix |
 |---|---|---|
-| AI vocabulary | additionally (opening a sentence), align with, bolstered, crucial, delve, emphasizing, enduring, enhance, fostering, garner, highlight (verb), interplay, intricate, key (adjective), landscape (abstract), meticulous, pivotal, robust, showcase, tapestry, testament, underscore (verb), valuable, vibrant | These words tend to appear together, so one instance means little and several are a strong sign. The word usually decorates an empty claim, so fix the claim; where the claim is real, use a plain word. Literal senses (a key in a lock, the underscore character) are fine. |
+| AI vocabulary | additionally (opening a sentence), align with, bolstered, crucial, delve, emphasizing, enduring, enhance, fostering, garner, highlight (verb), interplay, intricate, key (adjective), landscape (abstract), meticulous, pivotal, robust, showcase, tapestry, testament, underscore (verb), valuable, vibrant; from mid-2026, leverage, matters, multifaceted, prioritize, quietly, universally | These words tend to appear together, so one instance means little and several are a strong sign. The word usually decorates an empty claim, so fix the claim; where the claim is real, use a plain word. Literal senses (a key in a lock, the underscore character) are fine. |
 | Copula avoidance | "serves as", "stands as", "functions as", "represents"; "boasts", "features", "offers" meaning "has"; "refers to" in a definition; "ventured into politics as a candidate" | Use is, are, has, or "was a candidate". |
 | Vague attribution | "experts argue", "observers note", "industry reports", "widely regarded", "several sources" backed by one, "such as" in front of a complete list | Name the source and what it said, give the actual count, or remove the attribution. |
 | Vague connection | "associated with", "in connection with" | State the relationship: founded, worked for, taught at. |
@@ -120,8 +123,8 @@ Use these steps on your own draft before handing it over, or on the user's text 
 | Heading overgrowth | headings on a short answer, a heading holding only subheadings, a title heading repeating the document name, a horizontal rule between every section | Add headings only where readers will need to navigate. |
 | Tiny tables | a three-row table for facts that fit in a sentence | Write it as a sentence. |
 | Emoji as formatting | emoji bullets or heading prefixes | Remove them. |
-| Chat residue | "Certainly!", "Here is a...", "I hope this helps", "Let me know if...", "Would you like me to..." | Delete it. |
-| Placeholders | "[Your Name]", "2025-XX-XX", "INSERT_URL" | Fill them in from context or ask the user. Don't hand over text with unmarked blanks. |
+| Chat residue | "Certainly!", "Here is a...", "I hope this helps", "Let me know if...", "Would you like me to...", "verify these details before publishing", drafting notes left in comments ("expand once the body exists") | Delete it. Act on drafting notes or remove them before handing the text over. |
+| Placeholders | "[Your Name]", "[Year]", "2025-XX-XX", "INSERT_URL", "example.com/source1" | Fill them in from context or ask the user. Don't hand over text with unmarked blanks. |
 | Unverified citations | plausible references never checked, a book cited with no page for a specific claim | Cite only sources you have checked, and say when you couldn't verify something. |
 
 ## Examples
@@ -162,6 +165,22 @@ Puffery and trailing "-ing" clauses, also from Wikipedia:
 
 The rewrite keeps both facts. The original's "approximately" in front of an exact census figure adds nothing.
 
+Corrective framing in a PR description:
+
+> Before: The benchmark shows a 30% reduction in parse time. These results should be treated as indicative rather than definitive, and they do not by themselves establish that end-to-end latency will improve.
+>
+> After: On the parser benchmark (10,000 synthetic files, one machine), parse time dropped 30%. I haven't measured end-to-end latency.
+
+The rewrite keeps both limits on the result but states them as facts about the measurement, so the reader can judge the result for themselves.
+
+A "rather than" contrast, from an October 2026 Wikipedia draft about a software tool:
+
+> Before: Rather than introducing a new decompiler, REA acts as an interface between AI agents and established analysis tools, allowing an agent to gather pseudocode, assembly instructions, symbols, module relationships, and other evidence and use the results during software-development tasks.
+>
+> After: REA lets AI agents run existing analysis tools and use the pseudocode, assembly instructions, symbols, module relationships, and other output they return during software-development tasks.
+
+The opening contrast rules out something the reader had no reason to assume. The rewrite also replaces "acts as an interface" with a verb that says what REA does.
+
 An AI copyedit of plain human prose, with the human original first:
 
 > Human: Gallery 825 on La Cienega Boulevard, which was purchased in 1958, is LAAA's exhibition arm for contemporary art. There are four individual gallery spaces.
@@ -182,10 +201,10 @@ Before handing text over, confirm that:
 
 - Every sentence has a fact, claim, or instruction behind it and would lose something if deleted.
 - No sentence asserts that something is significant without showing why.
-- There are no reflexive contrasts, triads, rhetorical questions, setup lines, slogans, or trailing "-ing" clauses.
+- There are no reflexive contrasts, triads, rhetorical questions, setup lines, slogans, or trailing "-ing" clauses, and no instructions to the reader on how to interpret a source.
 - Verbs are plain, using is and has where they fit.
 - Attributions name their sources, and counts are accurate.
-- There are no em dashes and no runs of sentences opening with transitions.
+- There are no em dashes and no runs of sentences opening with transitions, and sentence length and punctuation still vary.
 - Formatting suits the content and the destination, with little bold and few headings.
 - There is no chat framing and there are no placeholders.
 - Nothing is invented, and gaps are flagged.

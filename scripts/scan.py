@@ -56,7 +56,7 @@ RULES = [
         alt("align(?:s|ed|ing)? with", "bolster(?:s|ed|ing)?", "crucial(?:ly)?", "deep dive", "delv(?:e|es|ed|ing)",
             "emphasi[sz](?:e|es|ed|ing)", "enduring", "enhanc(?:e|es|ed|ing|ement)", "foster(?:s|ed|ing)?",
             "garner(?:s|ed|ing)?", "highlight(?:s|ed|ing)?", "interplay", "intricac(?:y|ies)", "intricate",
-            "landscape", "meticulous(?:ly)?", "pivotal", "robust(?:ly|ness)?", "showcas(?:e|es|ed|ing)", "tapestry",
+            "landscape", "meticulous(?:ly)?", "multifaceted", "pivotal", "quietly", "robust(?:ly|ness)?", "showcas(?:e|es|ed|ing)", "tapestry",
             "testament", "underscor(?:e|es|ed|ing)", "valuable", "leverag(?:e|es|ed|ing)", "realm",
             "resonat(?:e|es|ed|ing) with", "valuable insights?"),
     ]),
@@ -71,14 +71,24 @@ RULES = [
         r"\b(?:isn't|aren't|wasn't|weren't|is not|are not|was not|were not|doesn't|does not|don't|do not|(?:it|that|this|there|he|she)'s not|(?:they|you|we)'re not)\b(?: just| only| merely| simply| about)?[^.!?\n,;:]{1,60}[;,:\u2014\u2013]\s*(?:it's|it is|they're|they are|that's|this is|it was|rather)\b",
         r"\b(?:is|are|was|were)\s+not\s+(?:a |an |the )?\w+(?:\s+\w+){0,3},?\s+but\s+(?:a|an|the|in|rather)\b",
         r"[.!?]\s+Rather,",
+        r"(?:^|[.!?]\s+)Rather than\b",
         r"\bRather than (?:simply|just|merely)\b",
         r"\b(?:not|no) (?:a |an |the )?\w+(?: \w+)?, (?:not|no) (?:a |an |the )?\w+",
+    ]),
+    ("corrective framing", "say what the evidence shows; state a real limit as a fact", [
+        r"\bshould (?:instead )?be (?:treated|read|understood|seen|viewed|presented|interpreted|regarded|framed|taken) as\b[^.\n]{0,100}?\brather than\b",
+        r"\b(?:does not|do not|did not|doesn't|don't|didn't|cannot|can't|could not|couldn't)(?: by itself| on its own| alone| necessarily)? (?:establish|prove|demonstrate|confirm)\b",
+        r"\b(?:by itself|on its own|alone),? (?:does not|doesn't|cannot|can't) (?:establish|prove|demonstrate|confirm|mean)\b",
+        r"\b(?:should not|shouldn't|not to) be confused with\b",
+        r"\b(?:distinction|difference|nuance) (?:matters|is (?:important|crucial|significant|key))\b",
     ]),
     ("rhetorical device", "make the statement instead", [
         r"\bOne might (?:wonder|ask)\b",
         r"(?:^|[.!?]\s+)(?:The result|The answer|The catch|The problem|The kicker|The upshot|The takeaway|The difference|The twist|The reason)\?",
         r"\bHere's (?:the thing|why|what|how)\b",
         r"\b(?:Why|What) does (?:this|that|it) matter\?",
+        r"(?:^|[.!?]\s+)(?:This|That|It) matters\b",
+        r"\bwhy (?:this|that|it) matters\b",
         r"\bLet that sink in\b",
         r"\bFull stop\.",
         r"\bAnd that's (?:the point|what matters|okay)\b",
@@ -154,6 +164,10 @@ RULES = [
         r"\byou're (?:absolutely )?right\b",
         r"\bI hope this (?:message|email) finds you well\b",
         r"\bas an? (?:AI|large language model|language model)\b",
+        r"\b(?:verify|double-check|confirm|fact-check) (?:these|the|all|any|this|each|that)\b[^.\n]{0,60}?\bbefore (?:publishing|publication|submitting|submission|posting)\b",
+        r"\bapologi[sz]e for any (?:inconvenience|confusion|trouble)\b",
+        r"\b(?:I|we) (?:have )?carefully reviewed\b",
+        r"\bplease point (?:them|it|these|those|this) out\b",
     ]),
     ("change-note puffery", "name the concrete change", [
         r"\b(?:improv|enhanc|refin|streamlin)\w* (?:the )?(?:overall )?(?:clarity|flow|readability|tone|consistency|structure|conciseness|maintainability)\b",
@@ -163,8 +177,9 @@ RULES = [
         r"\b(?:follows|adheres to|in line with|in accordance with|in compliance with) (?:the )?(?:best practices|style guide|guidelines)\b",
     ]),
     ("placeholder", "fill it in or ask", [
-        r"\[(?:Your|Insert|Add|Describe|Link|Name|Company|Date|Title|Author)\b[^\]\n]{0,80}\]",
+        r"\[(?:Your|Insert|Add|Describe|Links?|Names?|Company|Date|Year|Title|Author|Article|Founders?|Email|Brief|Specific|Reason)\b[^\]\n]{0,80}\](?![(\[])",
         r"\b20\d\d-(?:XX|xx)-(?:XX|xx)\b",
+        r"\bexample\.com/(?:source|article|news|ref|citation)\w*",
         r"\b(?:INSERT|PASTE|SOURCE|ADD)_[A-Z_]+\b",
         r"\((?:Add|Insert|Paste) [^)\n]{0,60}(?:here|if available)\)",
     ]),
@@ -221,7 +236,8 @@ def mask(text):
         blank(m.start(), m.end())
     for m in re.finditer(r"https?://[^\s)>\]]+", text):
         blank(m.start(), m.end())
-        for t in re.finditer(r"utm_source=[\w.]+|referrer=grok\.com", m.group(0)):
+        for t in re.finditer(r"utm_source=[\w.]+|referrer=grok\.com|example\.com/(?:source|article|news|ref|citation)\w*",
+                             m.group(0)):
             out[m.start() + t.start():m.start() + t.end()] = t.group(0)
     return "".join(out)
 
